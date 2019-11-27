@@ -17,23 +17,23 @@ app.controller('TicTacCtrl', function($scope, $http) {
 				$scope.cc = response.data;
 				$scope.arr = $scope.cc.split("@");
 				console.log(response.data);
+				
 				$scope.board = [
 					    [ { value: $scope.arr[0] }, { value: $scope.arr[1] }, { value: $scope.arr[2] } ],
 					    [ { value: $scope.arr[3] }, { value: $scope.arr[4] }, { value: $scope.arr[5] } ],
 					    [ { value: $scope.arr[6] }, { value: $scope.arr[7] }, { value: $scope.arr[8] } ]	
 				]; 
-				 $scope.gamestatus =  $scope.arr[9];
-				 $scope.player = $scope.arr[10];
-				 $scope.userPlayer = $scope.arr[11];
-				 $scope.roomid = $scope.arr[12];
-				 $scope.creator = $scope.arr[13];
-				 $scope.oponent  = $scope.arr[14];
-				 $scope.currentPlayer = $scope.arr[15];
-				 $scope.winner = $scope.arr[17];
-				 $scope.gamers = $scope.arr[13] + " VS " + $scope.arr[14];
-				 
 				
-				 
+				$scope.gamestatus =  $scope.arr[9];
+				$scope.player = $scope.arr[10];
+				$scope.userPlayer = $scope.arr[11];
+				$scope.roomid = $scope.arr[12];
+				$scope.creator = $scope.arr[13];
+				$scope.oponent  = $scope.arr[14];
+				$scope.currentPlayer = $scope.arr[15];
+				$scope.winner = $scope.arr[17];
+				$scope.gamers = $scope.arr[13] + " VS " + $scope.arr[14];
+				  
 		});	 
 			 
 		 

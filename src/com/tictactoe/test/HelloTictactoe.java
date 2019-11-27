@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/InsertData") 
 public class HelloTictactoe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private static int counter = 0;
     /**
      * Default constructor. 
      * @throws SQLException 
@@ -73,12 +73,14 @@ public class HelloTictactoe extends HttpServlet {
 			int position = Integer.parseInt(request.getParameter("position"));
 			//db.updateCell(cell_selected,row,position,roomid);
 			String selectedcellSession  = (String) session.getAttribute("seleted_cell");
-			db.updateCell(selectedcellSession ,row,position,roomid);
+			int xxx = (int)session.getAttribute("PlayerID");
+			db.updateCell(selectedcellSession ,row,position,roomid,xxx);
 
 		}
 		
 		
 		ArrayList<Board> bd = Database.bdlist(roomid);
+		
 		
 		int i = 0;
 		for (Board __s : bd){	
@@ -103,77 +105,86 @@ public class HelloTictactoe extends HttpServlet {
 			
 		}
 		
-	
+		if(roomid == room_id) {
+			counter++;
+			session.setAttribute("counter", counter );
+		}
+		
+		int playerid = playerid_1;
 		
 		if(v1.equals("O") && v2.equals("O") && v3.equals("O")){
 			status = "Winner";
 			player = "O";
-		    winner = db.updateforwinner(room_id, oponent, playerid_2);
+		    winner = db.updateforwinner(room_id, oponent, playerid);
 		}
 		else if(v1.equals("X") && v2.equals("X") && v3.equals("X")) {
 			status = "Winner"; player = "X";
-			winner = db.updateforwinner(room_id, creator, playerid_1);
+			winner = db.updateforwinner(room_id, creator, playerid);
 		}
 		else if(v4.equals("O") && v5.equals("O") && v6.equals("O")) {
 			status = "Winner"; player = "O";
-		    winner = db.updateforwinner(room_id, oponent, playerid_2);
+		    winner = db.updateforwinner(room_id, oponent, playerid);
 		}
 		else if(v4.equals("X") && v5.equals("X") && v6.equals("X")) {
 			status = "Winner"; player = "X";
-			winner = db.updateforwinner(room_id, creator, playerid_1);
+			winner = db.updateforwinner(room_id, creator, playerid);
 		}
 		else if(v7.equals("O") && v8.equals("O") && v9.equals("O")) {
 			status = "Winner"; player = "O";
-			winner = db.updateforwinner(room_id, oponent, playerid_2);
+			winner = db.updateforwinner(room_id, oponent, playerid);
 		}
 		else if(v7.equals("X") && v8.equals("X") && v9.equals("X")) {
 			status = "Winner"; player = "X";
-			winner = db.updateforwinner(room_id, creator, playerid_1);
+			winner = db.updateforwinner(room_id, creator, playerid);
 		}
 		else if(v1.equals("O") && v4.equals("O") && v7.equals("O")) {
 			status = "Winner"; player = "O";
-			winner = db.updateforwinner(room_id, oponent, playerid_2);	
+			winner = db.updateforwinner(room_id, oponent, playerid);	
 		}
 		else if(v1.equals("X") && v4.equals("X") && v7.equals("X")) {
 			status = "Winner"; player = "X";
-			winner = db.updateforwinner(room_id, creator, playerid_1);
+			winner = db.updateforwinner(room_id, creator, playerid);
 		}
 		else if(v2.equals("O") && v5.equals("O") && v8.equals("O")) {
 			status = "Winner"; player = "O";
-			winner = db.updateforwinner(room_id, oponent, playerid_2);
+			winner = db.updateforwinner(room_id, oponent, playerid);
 		}
 		else if(v2.equals("X") && v5.equals("X") && v8.equals("X")) {
 			status = "Winner"; player = "X";
-			winner = db.updateforwinner(room_id, creator, playerid_1);
+			winner = db.updateforwinner(room_id, creator, playerid);
 		}
 		else if(v3.equals("O") && v6.equals("O") && v9.equals("O")) {
 			status = "Winner"; player = "O";
-			winner = db.updateforwinner(room_id, oponent, playerid_2);
+			winner = db.updateforwinner(room_id, oponent, playerid);
 		}
 		else if(v3.equals("X") && v6.equals("X") && v9.equals("X")) {
 			status = "Winner"; player = "X";
-			winner = db.updateforwinner(room_id, creator, playerid_1);
+			winner = db.updateforwinner(room_id, creator, playerid);
 		}
 		else if(v1.equals("O") && v5.equals("O") && v9.equals("O")) {
 			status = "Winner"; player = "O";
-			winner = db.updateforwinner(room_id, creator, playerid_2);
+			winner = db.updateforwinner(room_id, creator, playerid);
 		}
 		else if(v1.equals("X") && v5.equals("X") && v9.equals("X")) {
 			status = "Winner"; player = "X";
-			winner = db.updateforwinner(room_id, creator, playerid_1);
+			winner = db.updateforwinner(room_id, creator, playerid);
 		}
 		else if(v3.equals("O") && v5.equals("O") && v7.equals("O")) {
 			status = "Winner"; player = "O";
-			winner = db.updateforwinner(room_id, oponent, playerid_2);
+			winner = db.updateforwinner(room_id, oponent, playerid);
 		}
 		else if(v3.equals("X") && v5.equals("X") && v7.equals("X")) {
 			status = "Winner"; player = "X";
-			winner = db.updateforwinner(room_id, creator, playerid_1);
+			winner = db.updateforwinner(room_id, creator, playerid);
 		}
 		else {
 			
-			winner = checkwinner;
-			
+			if((v1.equals("O") || v1.equals("X")) && (v2.equals("O") || v2.equals("X"))  && (v3.equals("O") || v3.equals("X"))
+			&& (v4.equals("O") || v4.equals("X"))  && (v5.equals("O") || v5.equals("X"))  && (v6.equals("O") || v6.equals("X"))
+			 && (v7.equals("O") || v7.equals("X"))  && (v8.equals("O") || v8.equals("X"))  && (v9.equals("O") || v9.equals("X"))
+			) {
+			winner = "DRAW";	
+			}
 		}
 		
 		

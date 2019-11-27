@@ -3,12 +3,15 @@ package com.tictactoe.test;
 import java.sql.*;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 public class Database {
 	
 	private static int playerID = 0;
 	private static String playername = "";
 	private static String userCell = "";
-    public boolean validate(String username, String password) throws ClassNotFoundException{
+    private static int win = 0;
+	public boolean validate(String username, String password) throws ClassNotFoundException{
     	boolean resp = false;
     	ResultSet rs;
     	try 
@@ -26,6 +29,7 @@ public class Database {
     			this.playername = rs.getString("playername");
     			this.userCell = rs.getString("cell");
     			this.playerID = rs.getInt("id");
+    			this.win =  rs.getInt("win");
     			resp = true;
     		}
     		
@@ -96,10 +100,10 @@ public class Database {
        
     }
     
-    public void updateCell(String cell,int row, int position,int roomid) {
+    public void updateCell(String cell,int row, int position,int roomid,int playerid) {
     	
     	Connection con = null;
-    	
+  
     	try 
     	{
     		
@@ -112,20 +116,23 @@ public class Database {
     		if(row == 1) 
     		{    			
     			if(position == 0) {
-    				preparedStatement = connection.prepareStatement("UPDATE board SET val1 = ? WHERE id=?");
+    				preparedStatement = connection.prepareStatement("UPDATE board SET val1 = ?, playerid_1=? WHERE id=?");
         			preparedStatement.setString(1, cell);
-        			preparedStatement.setInt(2, roomid);
+        			preparedStatement.setInt(2, playerid);
+        			preparedStatement.setInt(3, roomid);
         			
     			}
     			if(position == 1) { 
-    				preparedStatement = connection.prepareStatement("UPDATE board SET val2 = ? WHERE id=?");
-    				preparedStatement.setString(1, cell);
-    				preparedStatement.setInt(2, roomid);
+    				preparedStatement = connection.prepareStatement("UPDATE board SET val2 = ?, playerid_1=? WHERE id=?");
+        			preparedStatement.setString(1, cell);
+        			preparedStatement.setInt(2, playerid);
+        			preparedStatement.setInt(3, roomid);
     			}
    			   if(position == 2) { 
-    				preparedStatement = connection.prepareStatement("UPDATE board SET val3 = ? WHERE id=?");
-    				preparedStatement.setString(1, cell);
-    				preparedStatement.setInt(2, roomid);
+	   				preparedStatement = connection.prepareStatement("UPDATE board SET val3 = ?, playerid_1=? WHERE id=?");
+	    			preparedStatement.setString(1, cell);
+	    			preparedStatement.setInt(2, playerid);
+	    			preparedStatement.setInt(3, roomid);
    			   }
     		}
     		
@@ -136,19 +143,22 @@ public class Database {
     		if(row == 2) 
     		{    			
     			if(position == 0) {
-    				preparedStatement = connection.prepareStatement("UPDATE board SET val4 = ? WHERE id=?");
-        			preparedStatement.setString(1, cell);
-        			preparedStatement.setInt(2, roomid);
+    				preparedStatement = connection.prepareStatement("UPDATE board SET val4 = ?, playerid_1=? WHERE id=?");
+	    			preparedStatement.setString(1, cell);
+	    			preparedStatement.setInt(2, playerid);
+	    			preparedStatement.setInt(3, roomid);
     			}
     			if(position == 1) { 
-    				preparedStatement = connection.prepareStatement("UPDATE board SET val5 = ? WHERE id=?");
-    				preparedStatement.setString(1, cell);
-    				preparedStatement.setInt(2, roomid);
+    				preparedStatement = connection.prepareStatement("UPDATE board SET val5 = ?, playerid_1=? WHERE id=?");
+	    			preparedStatement.setString(1, cell);
+	    			preparedStatement.setInt(2, playerid);
+	    			preparedStatement.setInt(3, roomid);
     			}
    			   if(position == 2) { 
-    				preparedStatement = connection.prepareStatement("UPDATE board SET val6 = ? WHERE id=?");
-    				preparedStatement.setString(1, cell);
-    				preparedStatement.setInt(2, roomid);
+   				preparedStatement = connection.prepareStatement("UPDATE board SET val6 = ?, playerid_1=? WHERE id=?");
+    			preparedStatement.setString(1, cell);
+    			preparedStatement.setInt(2, playerid);
+    			preparedStatement.setInt(3, roomid);
     			}
     		}
     		
@@ -159,19 +169,22 @@ public class Database {
     		if(row == 3) 
     		{    			
     			if(position == 0) {
-    				preparedStatement = connection.prepareStatement("UPDATE board SET val7 = ? WHERE id=?");
-        			preparedStatement.setString(1, cell);
-        			preparedStatement.setInt(2, roomid);
+    				preparedStatement = connection.prepareStatement("UPDATE board SET val7 = ?, playerid_1=? WHERE id=?");
+	    			preparedStatement.setString(1, cell);
+	    			preparedStatement.setInt(2, playerid);
+	    			preparedStatement.setInt(3, roomid);
     			}
     			if(position == 1) { 
-    				preparedStatement = connection.prepareStatement("UPDATE board SET val8 = ? WHERE id=?");
-    				preparedStatement.setString(1, cell);
-    				preparedStatement.setInt(2, roomid);
+    				preparedStatement = connection.prepareStatement("UPDATE board SET val8 = ?, playerid_1=? WHERE id=?");
+	    			preparedStatement.setString(1, cell);
+	    			preparedStatement.setInt(2, playerid);
+	    			preparedStatement.setInt(3, roomid);
     			}
    			   if(position == 2) { 
-    				preparedStatement = connection.prepareStatement("UPDATE board SET val9 = ? WHERE id=?");
-    				preparedStatement.setString(1, cell);
-    				preparedStatement.setInt(2, roomid);
+	   				preparedStatement = connection.prepareStatement("UPDATE board SET val9 = ?, playerid_1=? WHERE id=?");
+	    			preparedStatement.setString(1, cell);
+	    			preparedStatement.setInt(2, playerid);
+	    			preparedStatement.setInt(3, roomid);
     			}
     		}
     		
@@ -224,7 +237,7 @@ public class Database {
     	try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoegame?autoReconnect=true&serverTimezone=UTC&useSSL=False&allowPublicKeyRetrieval=true", "root", ""); 
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT playername, MAX(win) as win, lost, draw FROM users");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT playername, win, lost, draw FROM users");
 			
 			rs = preparedStatement.executeQuery();
 			while(rs.next()) {
@@ -312,6 +325,7 @@ public class Database {
     
     public String updateforwinner(long boardid, String winner, int playerid) {
     	String __winner = null;
+    	int score = 0;
     	try 
     	{
     		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -325,12 +339,19 @@ public class Database {
 	    	preparedStatement =  connection.prepareStatement("UPDATE board SET winner=? WHERE id=?");
 	    	while(rs.next()) {
 	    		__winner = rs.getString("playername");
+	    		score =  rs.getInt("win");
 	    		preparedStatement.setString(1, __winner);
 		    	preparedStatement.setLong(2, boardid);
+		    	
 	    	}
 	    	
-	    	
 	    	preparedStatement.execute();
+	    	preparedStatement = connection.prepareStatement("UPDATE users SET win=? WHERE id=?");
+	    	preparedStatement.setInt(1, score + 1);
+	    	preparedStatement.setInt(2, 1);
+	    	preparedStatement.execute();
+	    	
+	    	
 	    	
 	    	
 	    } catch (ClassNotFoundException e) {
@@ -343,6 +364,10 @@ public class Database {
     
     public static void checkwinner() {
     	
+    }
+    
+    public static int getScore() {
+    	return win;
     }
 
 }

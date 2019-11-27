@@ -53,6 +53,7 @@ public class LoginAccount extends HttpServlet {
 				session.setAttribute("username", db.getPlayername());
 				session.setAttribute("seleted_cell", db.getUsercell());
 				session.setAttribute("PlayerID", db.getplayerid());
+				
 			}else {
 				out.println("Failed to login!");
 			}

@@ -18,7 +18,7 @@
 
 
  <div class="container">
-     <span style="text-align:center; display:block; width:100%; font-size:30px; ">{{ gamers }}</span>
+     <span style="text-align:center; display:block; width:100%; font-size:30px;   text-transform: uppercase;">{{ gamers }}</span>
       <div class="well">
       
         <div><button class="custom-btn btn-primary btn-lg" ng-repeat="cell in board[0]" ng-disabled="ticked(cell);" ng-click="playerchoice(cell,1,$index)">{{ cell.value }}</button></div>

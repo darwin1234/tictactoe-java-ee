@@ -25,7 +25,7 @@ app.controller('roomcontroller', function($scope, $http) {
 		}).then(function(response){
 			 $scope.list.push(response.data);
 			 $scope.ss 		= response.data;
-		     $scope.jjj 		= $scope.ss.split("\r\n");
+		     $scope.jjj     = $scope.ss.split("\r\n");
 		});
 		
 	}

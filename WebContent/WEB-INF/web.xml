@@ -139,4 +139,14 @@
     <servlet-name>JoinGame</servlet-name>
     <url-pattern>/JoinGame</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SubmitCell</display-name>
+    <servlet-name>SubmitCell</servlet-name>
+    <servlet-class>com.tictactoe.test.SubmitCell</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubmitCell</servlet-name>
+    <url-pattern>/SubmitCell</url-pattern>
+  </servlet-mapping>
 </web-app>
