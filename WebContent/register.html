@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<style>
+	.registerplayer{width:500px; margin:10px auto;}
+	.registerform{width:100%;   display:block;}
+	.registerform input {width:100%; height:30px;}
+</style>
+<body  ng-app="submitExample">
+
+
+<form ng-submit="submit()" ng-controller="ExampleController">
+  <p>Register</p>
+  <p><input type="text" ng-model="username" name="username" placeholder="Username" /></p>
+  <p><input type="password" ng-model="password" name="password" placeholder="Password"/></p>
+  <p><input type="text" ng-model="firstname" name="firstname"  placeholder="Firstname"/></p>
+  <p><input type="text" ng-model="lastname" name="lastname"  placeholder="Lastname"/></p>
+  <input type="submit" id="submit" value="Register" />
+  <pre>list={{list}}</pre>
+</form>
+
+<script src="users.js"></script>
+
+</body>
+</html>

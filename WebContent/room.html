@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<style>
+	.registerplayer{width:500px; margin:10px auto;}
+	.registerform{width:100%;   display:block;}
+	.registerform input {width:100%; height:30px;}
+	.room{background:#34A853; color:#fff; cursor: pointer;}
+	.roomname{display:block; clear:both; color:#fff; }
+	.player{background:#4285F4; color:#fff;}
+	.col {float:left; width:48%; overflow:auto;  padding:10px;}
+	button{border:0; margin:5px; padding:5px; background:none;  cursor:pointer}
+	.roomwrapper{width:80%; margin:100px auto; overflow:auto;}
+	.newgame{width:300px; background: #EA4335; color:#fff; padding:10px;  margin:50px auto; display:block; text-align:center;  text-decoration:none;}
+</style>
+<body>
+<div>
+
+	<div  class="roomwrapper" ng-app="roomApp" ng-controller="roomcontroller">
+	<h3>Welcome: {{welcomeUser}}</h3>
+			<a class="newgame" href="createroom.html" >Create Room</a>
+			<div class="col room">
+				<h3>Rooms</h3>
+				<button class="roomname" ng-repeat="roomname in arr"  ng-click="gotoroom(roomname[0])">{{ roomname }}</button>
+			</div>
+			<div class="col player">
+			<h3>Top Players</h3>
+				<button class="roomname" ng-repeat="playername in jjj">{{ playername }}</button>
+			</div>
+	</div>
+	
+<script src="rooms.js"></script>
+</body>
+</html>

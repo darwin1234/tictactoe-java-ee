@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<style>
+	.createroom{width:400px; margin:120px auto; background:#34A853; color:#fff; padding:10px;}
+	.createroom input[type="text"]{width:100%; height:40px;}
+	.createroom input[type="submit"]{width:100%; height:40px; background:#EA4335; color:#fff; border:0;  cursor:pointer;}
+	.createroom h2{text-align:center;}
+	.newgame{position:absolute; top:0; right:0; height:50px; width:200px;}
+</style>
+<body  ng-app="createroom">
+<a href="/tictactoe/room.html" class="newgame" >Main</a>
+<div class="createroom">
+<form ng-submit="submit()" ng-controller="createroomController">
+  <h2>Create Room</h2>
+  <p><input type="text" ng-model="roomname" name="roomname" placeholder="Room Name" /></p>
+  
+  <input type="submit" id="submit" value="Create Room" />
+
+</form>
+</div>
+
+
+<script src="createroom.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<style>
+.container{width:500px; margin: 150px auto;}
+.custom-btn{width:160px; height:160px; font-size:50px;}
+.newgame{float:right; padding:10px; width:200px; margin-bottom:100px; background: #D71C31; text-decoration:none; color:#fff; border:1px solid #fff; text-align:center; }
+</style>
+<body>
+
+
+<div ng-app="tictactioApp" ng-controller="TicTacCtrl"> 
+
+<a href="/tictactoe/room.html" class="newgame" >Main</a>
+<a href="#"  class="newgame" ng-click="joingame()">Join Game</a>
+<strong>Game Status: </strong>{{winner}}
+
+
+
+ <div class="container">
+     <span style="text-align:center; display:block; width:100%; font-size:30px; ">{{creator}}   VS  {{oponent}}</span>
+      <div class="well">
+      
+        <div><button class="custom-btn btn-primary btn-lg" ng-repeat="cell in board[0]" ng-disabled="ticked(cell);" ng-click="playerchoice(cell,1,$index)">{{ cell.value }}</button></div>
+        <div><button class="custom-btn btn-primary btn-lg" ng-repeat="cell in board[1]" ng-disabled="ticked(cell);" ng-click="playerchoice(cell,2,$index)">{{ cell.value }}</button></div>
+        <div><button class="custom-btn btn-primary btn-lg" ng-repeat="cell in board[2]" ng-disabled="ticked(cell);" ng-click="playerchoice(cell,3,$index)">{{ cell.value }}</button></div>
+        <br/>
+      </div>
+    </div>
+
+</div>
+<script src="tictactoe.js"></script>
+
+
+</body>
+</html>
