@@ -10,8 +10,12 @@
 	.player{background:#4285F4; color:#fff;}
 	.col {float:left; width:48%; overflow:auto;  padding:10px;}
 	button{border:0; margin:5px; padding:5px; background:none;  cursor:pointer}
-	.roomwrapper{width:80%; margin:100px auto; overflow:auto;}
+	.roomwrapper{width:80%; margin:100px auto; overflow-x:hidden;}
 	.newgame{width:300px; background: #EA4335; color:#fff; padding:10px;  margin:50px auto; display:block; text-align:center;  text-decoration:none;}
+	
+	@media only screen and (min-width: 320px) and (max-width:940px) {
+		.col{width:100%;}
+	}
 </style>
 <body>
 <div>

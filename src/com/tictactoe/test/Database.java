@@ -79,7 +79,7 @@ public class Database {
   		  	while(resultSet.next())
   		  	{
   		  		
-  		  		board = new Board(resultSet.getString("val1"),resultSet.getString("val2"),resultSet.getString("val3"),resultSet.getString("val4"), resultSet.getString("val5"), resultSet.getString("val6"),resultSet.getString("val7"), resultSet.getString("val8"), resultSet.getString("val9"),resultSet.getLong("id"), resultSet.getString("oponent"), resultSet.getString("creator"), resultSet.getInt("playerid_1"), resultSet.getInt("playerid_2"), resultSet.getString("cell1"), resultSet.getString("cell2"));
+  		  		board = new Board(resultSet.getString("val1"),resultSet.getString("val2"),resultSet.getString("val3"),resultSet.getString("val4"), resultSet.getString("val5"), resultSet.getString("val6"),resultSet.getString("val7"), resultSet.getString("val8"), resultSet.getString("val9"),resultSet.getLong("id"), resultSet.getString("oponent"), resultSet.getString("creator"), resultSet.getInt("playerid_1"), resultSet.getInt("playerid_2"), resultSet.getString("cell1"), resultSet.getString("cell2"), resultSet.getString("winner"));
   		  		rows.add(board);
   			}
   		  
@@ -260,7 +260,7 @@ public class Database {
 			preparedStatement.setString(10, roomname);
 			preparedStatement.setString(11, creatorname);
 			preparedStatement.setString(12,"-");
-			preparedStatement.setString(13,"-");
+			preparedStatement.setString(13,"Not Yet Started!");
 			preparedStatement.setInt(14, playerid_1);
 			preparedStatement.setInt(15, 0);
 			preparedStatement.setString(16, cell1);

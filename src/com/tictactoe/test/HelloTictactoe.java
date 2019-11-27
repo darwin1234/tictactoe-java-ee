@@ -51,7 +51,7 @@ public class HelloTictactoe extends HttpServlet {
 		doGet(request, response);
 		
 		/*************Variables*********************/
-		String v1 = null, v2 = null, v3 = null, v4 = null, v5 = null, v6 = null, v7 = null, v8 = null, v9 = null , status = null , player = null, oponent = null , creator = null, winner = null;
+		String v1 = null, v2 = null, v3 = null, v4 = null, v5 = null, v6 = null, v7 = null, v8 = null, v9 = null , status = null , player = null, oponent = null , creator = null, winner = null, checkwinner = null;
 		long room_id = 0;
 		int playerid_1 = 0 , playerid_2 = 0;
 		
@@ -97,6 +97,7 @@ public class HelloTictactoe extends HttpServlet {
 			creator = __s.getCreator();
 			playerid_1 = __s.getPlayerID1();
 			playerid_2 = __s.getPlayerID2();
+			checkwinner = __s.getcheckwinner();
 		
 			
 			
@@ -169,7 +170,11 @@ public class HelloTictactoe extends HttpServlet {
 			status = "Winner"; player = "X";
 			winner = db.updateforwinner(room_id, creator, playerid_1);
 		}
-		else {}
+		else {
+			
+			winner = checkwinner;
+			
+		}
 		
 		
 		out.println(v1 +"@"+ v2 +"@"+ v3 + "@" + v4 +"@"+ v5 + "@" + v6 + "@"+ v7 +"@"+ v8 +"@"+v9 + "@" + status + "@" + player + "@" + username + "@" + room_id + "@" + oponent + "@" + creator + "@" + "X" + "@" + "O" + "@" + winner);

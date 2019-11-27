@@ -11,6 +11,7 @@ app.controller('TicTacCtrl', function($scope, $http) {
 	 $scope.roomid ="";
 	 $scope.creator ="";
 	 $scope.oponent = "";
+	 $scope.gamers = "";
 	 setInterval(function(){
 		 $http.post("./InsertData" ).then(function(response){
 				$scope.cc = response.data;
@@ -28,12 +29,15 @@ app.controller('TicTacCtrl', function($scope, $http) {
 				 $scope.creator = $scope.arr[13];
 				 $scope.oponent  = $scope.arr[14];
 				 $scope.currentPlayer = $scope.arr[15];
-				 $scope.winner = $scope.arr[17] + "is the winner!";
+				 $scope.winner = $scope.arr[17];
+				 $scope.gamers = $scope.arr[13] + " VS " + $scope.arr[14];
+				 
+				
 				 
 		});	 
 			 
 		 
-	 },3000)
+	 },5000)
 	
 	 
 	// console.log(sessionStorage.getItem('room_id'));

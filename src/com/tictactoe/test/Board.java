@@ -18,8 +18,9 @@ public class Board {
 	private final int __playerid_2;
 	private final String __cell1;
 	private final String __cell2;
+	private final String __checkwinner;
 	
-	public Board(String val1,String val2,String val3,String val4,String val5,String val6,String val7,String val8,String val9, long rmid, String oponent, String creator, int playerid_1, int playerid_2, String cell1, String cell2) {
+	public Board(String val1,String val2,String val3,String val4,String val5,String val6,String val7,String val8,String val9, long rmid, String oponent, String creator, int playerid_1, int playerid_2, String cell1, String cell2, String checkwinner) {
 		
 		this.__value1 = val1;
 		this.__value2 = val2;
@@ -37,6 +38,7 @@ public class Board {
 		this.__playerid_2 =  playerid_2;
 		this.__cell1 = cell1;
 		this.__cell2 = cell2;
+		this.__checkwinner = checkwinner;
 	}
 	public String value1() {
 		
@@ -115,5 +117,9 @@ public class Board {
 	
 	public String getCell2() {
 		return __cell2;
+	}
+	
+	public String getcheckwinner() {
+		return __checkwinner;
 	}
 }

@@ -41,7 +41,7 @@ app.controller('roomcontroller', function($scope, $http) {
 	
 	$scope.gotoroom = function(room){
 		var Indata = {"roomid":room};
-		alert(room);
+		//alert(room);
 		$http({
 			url: "./gotoroom",
 			method: "POST",
