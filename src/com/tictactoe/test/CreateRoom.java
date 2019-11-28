@@ -43,6 +43,7 @@ public class CreateRoom extends HttpServlet {
 		int playerid_1 = (int) session.getAttribute("PlayerID");
 		String roomname = request.getParameter("roomname");
 		db.createRoom(roomname,creatorname,playerid_1,cell1);
+		db.countermaketrue(true);
 	}
 
 }

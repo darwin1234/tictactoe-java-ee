@@ -11,13 +11,16 @@ public class Database {
 	private static String playername = "";
 	private static String userCell = "";
     private static int win = 0;
+    private static boolean counter = true;
+  
+    
 	public boolean validate(String username, String password) throws ClassNotFoundException{
     	boolean resp = false;
     	ResultSet rs;
     	try 
     	{	
     		Class.forName("com.mysql.cj.jdbc.Driver");
-    		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoegame?autoReconnect=true&serverTimezone=UTC&useSSL=False&allowPublicKeyRetrieval=true", "root", ""); 
+    		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoegame?autoReconnect=true&serverTimezone=UTC&characterEncoding=utf8&useSSL=False&allowPublicKeyRetrieval=true", "root", ""); 
     		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users where username = ? AND password = ?");
     		preparedStatement.setString(1, username);
     		preparedStatement.setString(2, password);
@@ -45,7 +48,7 @@ public class Database {
     	try 
     	{	
     		Class.forName("com.mysql.cj.jdbc.Driver");
-    		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoegame?autoReconnect=true&serverTimezone=UTC&useSSL=False&allowPublicKeyRetrieval=true", "root", ""); 
+    		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoegame?autoReconnect=true&serverTimezone=UTC&characterEncoding=utf8&useSSL=False&allowPublicKeyRetrieval=true", "root", ""); 
     		PreparedStatement preparedStatement = connection.prepareStatement("insert into users(username, password, firstname,lastname,playername,win,lost,draw,cell) values(? , ? , ? , ?, ?, ?, ?, ?,?)");
     		preparedStatement.setString(1, username);
     		preparedStatement.setString(2, password);
@@ -75,7 +78,7 @@ public class Database {
     	try {
     		
     		Class.forName("com.mysql.cj.jdbc.Driver");
-    		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoegame?autoReconnect=true&serverTimezone=UTC&useSSL=False&allowPublicKeyRetrieval=true", "root", ""); 
+    		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoegame?autoReconnect=true&serverTimezone=UTC&characterEncoding=utf8&useSSL=False&allowPublicKeyRetrieval=true", "root", ""); 
     		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM board WHERE id = ?");
     		preparedStatement.setInt(1, rmid);
     		ResultSet resultSet = preparedStatement.executeQuery();
@@ -108,7 +111,7 @@ public class Database {
     	{
     		
     		Class.forName("com.mysql.cj.jdbc.Driver");
-    		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoegame?autoReconnect=true&serverTimezone=UTC&useSSL=False&allowPublicKeyRetrieval=true", "root", ""); 
+    		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoegame?autoReconnect=true&serverTimezone=UTC&characterEncoding=utf8&useSSL=False&allowPublicKeyRetrieval=true", "root", ""); 
     		
     		PreparedStatement preparedStatement = null;
     		//Row 1
@@ -209,7 +212,7 @@ public class Database {
     	
     	try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoegame?autoReconnect=true&serverTimezone=UTC&useSSL=False&allowPublicKeyRetrieval=true", "root", ""); 
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoegame?autoReconnect=true&serverTimezone=UTC&characterEncoding=utf8&useSSL=False&allowPublicKeyRetrieval=true", "root", ""); 
 			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM board");
 			
 			rs = preparedStatement.executeQuery();
@@ -236,9 +239,9 @@ public class Database {
     	
     	try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoegame?autoReconnect=true&serverTimezone=UTC&useSSL=False&allowPublicKeyRetrieval=true", "root", ""); 
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT playername, win, lost, draw FROM users");
-			
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoegame?autoReconnect=true&serverTimezone=UTC&characterEncoding=utf8&useSSL=False&allowPublicKeyRetrieval=true", "root", ""); 
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users AS a, (SELECT MAX(win) AS maxi , MIN(win) AS mini  FROM users) AS m WHERE m.maxi = a.win OR m.mini = a.win ORDER BY win DESC");
+			//PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users ");
 			rs = preparedStatement.executeQuery();
 			while(rs.next()) {
 			row = new Playerfields(rs.getString("playername"), rs.getInt("win"), rs.getInt("lost"), rs.getInt("draw"));
@@ -259,7 +262,7 @@ public class Database {
     	
     	try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoegame?autoReconnect=true&serverTimezone=UTC&useSSL=False&allowPublicKeyRetrieval=true", "root", ""); 
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoegame?autoReconnect=true&serverTimezone=UTC&characterEncoding=utf8&useSSL=False&allowPublicKeyRetrieval=true", "root", ""); 
 			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO board(val1,val2,val3,val4,val5,val6,val7,val8,val9,gamename,creator,oponent,winner,playerid_1, playerid_2, cell1, cell2)  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			preparedStatement.setString(1, "-");
 			preparedStatement.setString(2, "-");
@@ -302,7 +305,7 @@ public class Database {
     	try 
     	{
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoegame?autoReconnect=true&serverTimezone=UTC&useSSL=False&allowPublicKeyRetrieval=true", "root", ""); 
+				Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoegame?autoReconnect=true&serverTimezone=UTC&characterEncoding=utf8&useSSL=False&allowPublicKeyRetrieval=true", "root", ""); 
 	    		PreparedStatement preparedStatement = null;
 	    		preparedStatement = connection.prepareStatement("UPDATE board SET oponent =?, playerid_2 =?, cell2=? WHERE id=?");
 	        	preparedStatement.setString(1, Playername);
@@ -326,10 +329,11 @@ public class Database {
     public String updateforwinner(long boardid, String winner, int playerid) {
     	String __winner = null;
     	int score = 0;
+    
     	try 
     	{
     		Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoegame?autoReconnect=true&serverTimezone=UTC&useSSL=False&allowPublicKeyRetrieval=true", "root", ""); 
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoegame?autoReconnect=true&serverTimezone=UTC&characterEncoding=utf8&useSSL=False&allowPublicKeyRetrieval=true", "root", ""); 
 	    	PreparedStatement preparedStatement = null;
 	    	preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE id=?");
 	    	preparedStatement.setInt(1, playerid);
@@ -344,13 +348,17 @@ public class Database {
 		    	preparedStatement.setLong(2, boardid);
 		    	
 	    	}
-	    	
+	    	//counter = true;
 	    	preparedStatement.execute();
-	    	preparedStatement = connection.prepareStatement("UPDATE users SET win=? WHERE id=?");
-	    	preparedStatement.setInt(1, score + 1);
-	    	preparedStatement.setInt(2, 1);
-	    	preparedStatement.execute();
-	    	
+	    	if(counter == true) {
+	    		preparedStatement = connection.prepareStatement("UPDATE users SET win=? WHERE id=?");
+	    		preparedStatement.setInt(1, score + 1);
+	    		preparedStatement.setInt(2, playerid);
+	    		preparedStatement.execute();
+	    		counter = false;
+	    		//System.exit(0);
+	    		//counter = (Integer) null;
+	    	}
 	    	
 	    	
 	    	
@@ -370,4 +378,7 @@ public class Database {
     	return win;
     }
 
+    public static void countermaketrue(boolean m) {
+    	counter = m;
+    }
 }

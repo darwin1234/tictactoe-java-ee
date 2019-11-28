@@ -74,6 +74,7 @@ public class HelloTictactoe extends HttpServlet {
 			//db.updateCell(cell_selected,row,position,roomid);
 			String selectedcellSession  = (String) session.getAttribute("seleted_cell");
 			int xxx = (int)session.getAttribute("PlayerID");
+			
 			db.updateCell(selectedcellSession ,row,position,roomid,xxx);
 
 		}
@@ -184,6 +185,9 @@ public class HelloTictactoe extends HttpServlet {
 			 && (v7.equals("O") || v7.equals("X"))  && (v8.equals("O") || v8.equals("X"))  && (v9.equals("O") || v9.equals("X"))
 			) {
 			winner = "DRAW";	
+			}else {
+				
+				winner = "AAA";
 			}
 		}
 		

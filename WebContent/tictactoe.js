@@ -12,7 +12,7 @@ app.controller('TicTacCtrl', function($scope, $http) {
 	 $scope.creator ="";
 	 $scope.oponent = "";
 	 $scope.gamers = "";
-	 setInterval(function(){
+	 
 		 $http.post("./InsertData" ).then(function(response){
 				$scope.cc = response.data;
 				$scope.arr = $scope.cc.split("@");
@@ -33,11 +33,13 @@ app.controller('TicTacCtrl', function($scope, $http) {
 				$scope.currentPlayer = $scope.arr[15];
 				$scope.winner = $scope.arr[17];
 				$scope.gamers = $scope.arr[13] + " VS " + $scope.arr[14];
-				  
+				setTimeout($scope.init,8000);
+				
+				
 		});	 
 			 
 		 
-	 },5000)
+	
 	
 	 
 	// console.log(sessionStorage.getItem('room_id'));
@@ -89,7 +91,7 @@ app.controller('TicTacCtrl', function($scope, $http) {
 		  method: "POST",
 		  params: Indata
 	  }).then(function(response){
-		  $scope.init();
+		 $scope.init();
 		  
 	  });
 	  

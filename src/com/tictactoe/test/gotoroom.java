@@ -38,6 +38,7 @@ public class gotoroom extends HttpServlet {
 		int roomid = Integer.parseInt(request.getParameter("roomid"));
 		HttpSession session = request.getSession();
 		session.setAttribute("roomid",roomid);
+		
 	
 	}
 

@@ -42,7 +42,8 @@ public class Player extends HttpServlet {
 		PrintWriter out = response.getWriter(); 
 		for(Playerfields printRow :  plyr) {
 			printRow.getPlayername();
-			out.println(printRow.getPlayername() + " Win: " + printRow.getwin() + " Lost: " + printRow.getlost() +  " Draw: " + printRow.getdraw());
+			//out.println(printRow.getPlayername() + " Win: " + printRow.getwin() + " Lost: " + printRow.getlost() +  " Draw: " + printRow.getdraw());
+			out.println(printRow.getPlayername() + " Score: " + printRow.getwin());
 			
 		}
 	}
